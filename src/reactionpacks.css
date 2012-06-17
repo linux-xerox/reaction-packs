@@ -1,0 +1,13 @@
+/**
+Reaction CSS classes:
+
+reactions: {like => .like, love => .love, haha => .haha, wow => .wow, sad => .sorry, angry => .anger}
+
+sizes: {16px => ._2p7a.@reaction, 48px => ._iuz.@reaction, 96px@2x => .x2 ._iuz.@reaction}
+
+properties {
+	background-image: image sprite
+	background-size: sprite.width/2 sprite.height/2
+	background-position: offset for individual image
+}
+*/

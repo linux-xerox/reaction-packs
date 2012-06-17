@@ -1,0 +1,15 @@
+{
+  "title": "Reaction Packs for Facebook",
+  "name": "reaction-packs",
+  "version": "1.0.0",
+  "description": "Change your reaction pictures on Facebook.",
+  "homepage": "http://reactionpacks.com",
+  "main": "index.js",
+  "author": "Rodney Folz <rodney@rodneyfolz.com>",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "icon": "./icon48.png",
+  "license": "MPL-2.0"
+}

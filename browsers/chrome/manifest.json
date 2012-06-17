@@ -1,0 +1,31 @@
+{
+  "name": "Reaction Packs for Facebook",
+  "version": "1.0.0",
+  "description": "Change your reaction pictures on Facebook, and share with your friends!",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "http://www.facebook.com/*",
+    "https://www.facebook.com/*"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "reactionpacks.js"
+      ],
+      "css": [
+        "reactionpacks.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
