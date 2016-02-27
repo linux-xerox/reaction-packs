@@ -4,8 +4,8 @@ var self = require("sdk/self");
 
 var pageModder = pageMod.PageMod({
     include: "*.facebook.com",
-    contentStyleFile: self.data.url("reactionpacks.css"),
-    contentScriptFile: self.data.url("reactionpacks.js"),
+    contentStyleFile: self.data.url("style.css"),
+    contentScriptFile: self.data.url("index.js"),
     onAttach: startListening
 });
 

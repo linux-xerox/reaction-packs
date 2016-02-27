@@ -4,8 +4,8 @@ browser = process.env.BROWSER ||
     console.log('Use `npm run build` instead.') || process.exit(1);
 console.log('Building', browser, 'extension');
 
-var script_entry = 'reactionpacks.js';
-var style_entry = 'reactionpacks.css';
+var script_entry = 'index.js';
+var style_entry = 'style.css';
 
 // Firefox expects included scripts to be under the 'data' directory
 if (browser === 'firefox') {
@@ -15,7 +15,7 @@ if (browser === 'firefox') {
 
 module.exports = {
     context: __dirname + '/src',
-    entry: './reactionpacks.js',
+    entry: './index.js',
     resolve: {
         alias: {
             '--browser': __dirname + '/browsers/' + browser + '.js'

@@ -1,13 +1,13 @@
 import reduce from 'lodash/reduce';
 
-import packs from './packs';
-import reactions from './reactions';
+import packs from './data/packs';
+import reactions from './data/reactions';
 
 // Include browser-specific code and assets. (See webpack.config.js.)
 require('--browser');
 
 // Include styles.
-require('./reactionpacks.css');
+require('./style.css');
 
 function buildPackStyle(pack) {
     return reduce(reactions, (sum, opts, reaction) => {
