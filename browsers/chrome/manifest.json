@@ -5,8 +5,9 @@
   "manifest_version": 2,
   "permissions": [
     "storage",
-    "http://www.facebook.com/*",
-    "https://www.facebook.com/*"
+    "*://localhost/*",
+    "*://www.facebook.com/*",
+    "*://www.reactionpacks.com/*"
   ],
   "icons": {
     "16": "icon16.png",
@@ -16,14 +17,15 @@
   "content_scripts": [
     {
       "matches": [
-        "http://www.facebook.com/*",
-        "https://www.facebook.com/*"
+        "*://localhost/*",
+        "*://www.facebook.com/*",
+        "*://www.reactionpacks.com/*"
       ],
       "js": [
-        "reactionpacks.js"
+        "index.js"
       ],
       "css": [
-        "reactionpacks.css"
+        "style.css"
       ],
       "run_at": "document_idle"
     }

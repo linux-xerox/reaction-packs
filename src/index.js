@@ -1,3 +1,4 @@
+import EventEmitter2 from 'eventemitter2';
 
 import packs from './data/packs';
 import reactions from './data/reactions';
@@ -7,6 +8,10 @@ require('--browser');
 
 // Include styles.
 require('./style.css');
+
+
+const emitter = new EventEmitter2();
+const packs_api_path = `${document.location.protocol}//${document.location.host}/api/v1/packs/`;
 
 function buildPackStyle(pack) {
     return [].reduce.call(Object.keys(reactions), (sum, reaction) => {
@@ -51,10 +56,27 @@ function setReactionPack(packName) {
     updateReactionStyle(pack);
 }
 
-// This delay ensures that the elements have been created by Facebook's
-// scripts before we attempt to replace them
-var swap = false;
-setInterval(function () {
-    setReactionPack(swap ? 'facebook' : 'pokemon');
-    swap = !swap;
-}, 1000);
+if (~document.location.hostname.indexOf("facebook.com")) {
+    console.log("on facebook");
+
+    // This delay ensures that the elements have been created by Facebook's
+    // scripts before we attempt to replace them
+    var swap = false;
+    setInterval(function () {
+        setReactionPack(swap ? 'facebook' : 'pokemon');
+        swap = !swap;
+    }, 1000);
+} else if (~document.location.hostname.indexOf("reactionpacks.com")
+      || ~document.location.hostname.indexOf("localhost")) {
+    emitter.on('use-pack', (id) => {
+        console.log('pack requested:', packs_api_path + id);
+    });
+
+    [].forEach.call(document.getElementsByClassName('use-pack'), (el) => {
+        el.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            emitter.emit('use-pack', el.dataset.id);
+            return false;
+        }, false);
+    });
+}
