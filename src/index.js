@@ -1,10 +1,9 @@
 import EventEmitter2 from 'eventemitter2';
 
-import packs from './data/packs';
 import reactions from './data/reactions';
 
 // Include browser-specific code and assets. (See webpack.config.js.)
-require('--browser');
+var browser = require('--browser');
 
 // Include styles.
 require('./style.css');
@@ -32,7 +31,7 @@ function buildPackStyle(pack) {
     }, "");
 }
 
-function updateReactionStyle(pack) {
+function setReactionPack(pack) {
     var firstTime = false;
     var style = document.getElementById('reaction-pack-sheet');
 
@@ -50,26 +49,48 @@ function updateReactionStyle(pack) {
     }
 }
 
-function setReactionPack(packName) {
-    const pack = packs[packName];
-
-    updateReactionStyle(pack);
-}
-
 if (~document.location.hostname.indexOf("facebook.com")) {
     console.log("on facebook");
 
-    // This delay ensures that the elements have been created by Facebook's
-    // scripts before we attempt to replace them
-    var swap = false;
-    setInterval(function () {
-        setReactionPack(swap ? 'facebook' : 'pokemon');
-        swap = !swap;
-    }, 1000);
+    browser.loadSettings((items) => {
+        var pack = JSON.parse(items["pack"]);
+
+        console.log("using pack", pack);
+
+        // This delay ensures that the elements have been created by Facebook's
+        // scripts before we attempt to replace them
+        setTimeout(() => {
+            setReactionPack(pack);
+        }, 1000);
+    });
 } else if (~document.location.hostname.indexOf("reactionpacks.com")
       || ~document.location.hostname.indexOf("localhost")) {
     emitter.on('use-pack', (id) => {
-        console.log('pack requested:', packs_api_path + id);
+        var resource = packs_api_path + id;
+
+        var req = new XMLHttpRequest();
+        req.open("GET", resource, true);
+        req.onreadystatechange = () => {
+            if (req.readyState === XMLHttpRequest.DONE
+                && req.status === 200) {
+                emitter.emit('set-pack', JSON.parse(req.responseText));
+            } else if (req.readyState == XMLHttpRequest.DONE
+                && req.status !== 200) {
+                emitter.emit('set-pack-failed', req);
+            }
+        };
+        req.send()
+    });
+
+    emitter.on('set-pack', (pack) => {
+        console.log(pack["data"]);
+        browser.saveSettings({"pack": JSON.stringify(pack["data"])}, () => {
+            console.log("pack saved successfully");
+        });
+    });
+
+    emitter.on('set-pack-failed', (req) => {
+        console.log('Setting pack failed. Sorry. Here is the request', req);
     });
 
     [].forEach.call(document.getElementsByClassName('use-pack'), (el) => {
