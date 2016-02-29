@@ -26,6 +26,6 @@ export default {
     "pokemon": {
         "px32": "https://i.imgur.com/dLVelKc.png",
         "px48": "https://i.imgur.com/YJC3YPN.png",
-        "px96": "https://i.imgur.com/MFbrADU.png"
+        "px96": "https://i.imgur.com/ORDaggo.png"
     }
 };
