@@ -1,4 +1,3 @@
-import reduce from 'lodash/reduce';
 
 import packs from './data/packs';
 import reactions from './data/reactions';
@@ -10,7 +9,9 @@ require('--browser');
 require('./style.css');
 
 function buildPackStyle(pack) {
-    return reduce(reactions, (sum, opts, reaction) => {
+    return [].reduce.call(Object.keys(reactions), (sum, reaction) => {
+        var opts = reactions[reaction];
+
         return sum + `
             ._2p7a.${reaction} {
                 background-image: url(${pack['px32']});
