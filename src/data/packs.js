@@ -1,7 +1,7 @@
 /**
  * Custom reaction packs are a series of three spritemaps, dimensions
- * `width` by (`width` * 8), containing sprites for reactions in this
- * order:
+ * px`width` by (px`width` * 8), containing sprites for reactions in
+ * this order:
  *
  * - anger
  * - confused (not used)
