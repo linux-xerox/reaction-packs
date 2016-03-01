@@ -7,13 +7,13 @@ require('file?name=icon48.png!../assets/icon48.png');
 require('file?name=icon128.png!../assets/icon128.png');
 
 module.exports = {
-    loadSettings: (cb) => {
+    loadSettings(cb) {
         chrome.storage.sync.get(null, (data) => {
             cb(data);
         });
     },
 
-    saveSettings: (data, cb) => {
+    saveSettings(data, cb) {
         chrome.storage.sync.set(data, cb);
     }
 };

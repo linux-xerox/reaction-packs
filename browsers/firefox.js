@@ -20,3 +20,4 @@ module.exports = {
         self.port.emit('save-settings', data);
     }
 };
+
