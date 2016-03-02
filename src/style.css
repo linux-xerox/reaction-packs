@@ -12,6 +12,10 @@ properties {
 }
 */
 
-.hide-if-rp-extension-installed {
-    display: none;
+.rp-extension-hook.hide-if-rp-extension-installed {
+    display: none !important;
+}
+
+.rp-extension-hook.only-show-if-rp-extension-installed {
+    display: block !important;
 }

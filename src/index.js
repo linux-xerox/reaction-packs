@@ -31,7 +31,23 @@ function buildPackStyle(pack) {
     }, "");
 }
 
-function setReactionPack(pack) {
+function buildShowHideStyle(pack) {
+    return `
+        .rp-extension-hook.hide-if-active-rp[data-rp='${pack['id']}'] {
+            display: none !important;
+        }
+
+        .rp-extension-hook.only-show-if-active-rp[data-rp='${pack['id']}'] {
+            display: block !important;
+        }
+
+        li.rp-extension-hook.only-show-if-active-rp[data-rp='${pack['id']}'] {
+            display: inline-block !important;
+        }
+    `;
+}
+
+function setPageStyle(sheet) {
     var firstTime = false;
     var style = document.getElementById('reaction-pack-sheet');
 
@@ -42,11 +58,20 @@ function setReactionPack(pack) {
         style.type = 'text/css';
     }
 
-    style.innerHTML = buildPackStyle(pack);
+    style.innerHTML = sheet;
 
     if (firstTime) {
         document.getElementsByTagName('head')[0].appendChild(style);
     }
+}
+
+function setReactionPack(pack) {
+    setPageStyle(buildPackStyle(pack));
+}
+
+function setShowHidePack(pack) {
+    var style = buildShowHideStyle(pack);
+    setPageStyle(style);
 }
 
 if (~document.location.hostname.indexOf("facebook.com")) {
@@ -59,6 +84,14 @@ if (~document.location.hostname.indexOf("facebook.com")) {
     });
 } else if (~document.location.hostname.indexOf("reactionpacks.com")
       || ~document.location.hostname.indexOf("localhost")) {
+    browser.loadSettings((items) => {
+        var pack = JSON.parse(items["pack"]);
+
+        setTimeout(() => {
+            setShowHidePack(pack);
+        }, 1);
+    });
+
     emitter.on('use-pack', (id) => {
         var resource = packs_api_path + id;
 
@@ -78,12 +111,12 @@ if (~document.location.hostname.indexOf("facebook.com")) {
 
     emitter.on('set-pack', (pack) => {
         browser.saveSettings({"pack": JSON.stringify(pack["data"])}, () => {
-            alert(`[debug]: ${pack["data"]["name"]} Reaction Pack saved! Check Facebook :)`);
+            document.location.assign(`${document.location.protocol}//${document.location.host}/packs/${pack["data"]["id"]}`)
         });
     });
 
     emitter.on('set-pack-failed', (req) => {
-        alert(`[debug] Setting pack failed. Sorry. Here is the request: ${req}`);
+        alert(`[debug] Sorry, using this Pack failed. Please wait a minute, then refresh and try again.`);
     });
 
     [].forEach.call(document.getElementsByClassName('use-pack'), (el) => {
