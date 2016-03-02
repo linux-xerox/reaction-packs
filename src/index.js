@@ -50,15 +50,9 @@ function setReactionPack(pack) {
 }
 
 if (~document.location.hostname.indexOf("facebook.com")) {
-    console.log("on facebook");
-
     browser.loadSettings((items) => {
         var pack = JSON.parse(items["pack"]);
 
-        console.log("using pack", pack);
-
-        // This delay ensures that the elements have been created by Facebook's
-        // scripts before we attempt to replace them
         setTimeout(() => {
             setReactionPack(pack);
         }, 1000);
@@ -83,14 +77,13 @@ if (~document.location.hostname.indexOf("facebook.com")) {
     });
 
     emitter.on('set-pack', (pack) => {
-        console.log(pack["data"]);
         browser.saveSettings({"pack": JSON.stringify(pack["data"])}, () => {
-            console.log("pack saved successfully");
+            alert(`[debug]: ${pack["data"]["name"]} Reaction Pack saved! Check Facebook :)`);
         });
     });
 
     emitter.on('set-pack-failed', (req) => {
-        console.log('Setting pack failed. Sorry. Here is the request', req);
+        alert(`[debug] Setting pack failed. Sorry. Here is the request: ${req}`);
     });
 
     [].forEach.call(document.getElementsByClassName('use-pack'), (el) => {

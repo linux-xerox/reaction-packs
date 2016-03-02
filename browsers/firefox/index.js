@@ -10,14 +10,10 @@ var page = pageMod.PageMod({
 });
 
 function startListening(worker) {
-    console.log("Now listening to: ", worker);
-
     worker.port.on('load-settings', function() {
-        console.log("Asked to load settings.");
         worker.port.emit('settings-loaded', prefs);
     });
     worker.port.on('save-settings', function(settings) {
-        console.log("Asked to save settings.");
         [].forEach.call(Object.keys(settings), (key) => {
             prefs[key] = settings[key];
         });
