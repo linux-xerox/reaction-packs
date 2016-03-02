@@ -2,9 +2,11 @@
 
 Custom Reaction Packs for Facebook.
 
+
 ## Installation
 
 TODO: Add links to extension pages.
+
 
 ## Contributing
 
@@ -16,6 +18,20 @@ npm run build:<browser>
 ```
 
 replacing <browser> with "chrome" or "firefox" as appropriate.
+
+
+## TODO:
+
+### Extension
+
+* Update pack live instead of requiring a refresh
+* Add a status indicator somewhere
+
+### Site
+
+* "Request changes" flow for pack creators.
+* Link to pack creator's URL
+
 
 ## Project folder structure:
 
