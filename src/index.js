@@ -55,7 +55,7 @@ if (~document.location.hostname.indexOf("facebook.com")) {
 
         setTimeout(() => {
             setReactionPack(pack);
-        }, 1000);
+        }, 1);
     });
 } else if (~document.location.hostname.indexOf("reactionpacks.com")
       || ~document.location.hostname.indexOf("localhost")) {
