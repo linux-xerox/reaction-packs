@@ -1,8 +1,8 @@
 {
   "title": "Reaction Packs for Facebook",
   "name": "reaction-packs",
-  "version": "1.0.0",
-  "description": "Change your reaction pictures on Facebook.",
+  "version": "1.0.1",
+  "description": "Swap out Facebook's reactions for something a little more fun. View packs at http://www.reactionpacks.com/",
   "homepage": "http://reactionpacks.com",
   "main": "index.js",
   "author": "Rodney Folz <rodney@rodneyfolz.com>",

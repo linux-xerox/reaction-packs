@@ -1,7 +1,7 @@
 {
   "name": "Reaction Packs for Facebook",
-  "version": "1.0.0",
-  "description": "Change your reaction pictures on Facebook, and share with your friends!",
+  "version": "1.0.1",
+  "description": "Swap out Facebook's reactions for something a little more fun. View packs at http://www.reactionpacks.com/",
   "manifest_version": 2,
   "permissions": [
     "storage",
