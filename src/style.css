@@ -11,3 +11,7 @@ properties {
 	background-position: offset for individual image
 }
 */
+
+.hide-if-rp-extension-installed {
+    display: none;
+}
