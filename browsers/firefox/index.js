@@ -3,7 +3,7 @@ var pageMod = require("sdk/page-mod");
 var self = require("sdk/self");
 
 var page = pageMod.PageMod({
-    include: ["*.facebook.com", "*.reactionpacks.com", /.*localhost.*/],
+    include: ["*.facebook.com", "*.reactionpacks.com"],
     contentStyleFile: self.data.url("style.css"),
     contentScriptFile: self.data.url("index.js"),
     onAttach: startListening

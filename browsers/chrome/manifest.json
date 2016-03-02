@@ -1,11 +1,10 @@
 {
   "name": "Reaction Packs for Facebook",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Swap out Facebook's reactions for something a little more fun. View packs at http://www.reactionpacks.com/",
   "manifest_version": 2,
   "permissions": [
     "storage",
-    "*://localhost/*",
     "*://www.facebook.com/*",
     "*://www.reactionpacks.com/*"
   ],
