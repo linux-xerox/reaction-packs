@@ -17,16 +17,16 @@ function buildPackStyle(pack) {
         var opts = reactions[reaction];
 
         return sum + `
-            ._2p7a.${reaction} {
-                background-image: url(${pack['px32']});
-                background-size: 16px 128px;
-                background-position: ${opts['offset']};
+            ._2p7a.${opts['className']}, ._2p7a.${reaction} {
+                background-image: url(${pack['px32']}) !important;
+                background-size: 16px 128px !important;
+                background-position: ${opts['offset']} !important;
             }
-            ._iuz.${reaction} {
-                background-image: url(${pack['px48']});
+            ._iuz {
+                background-image: url(${pack['px48']}) !important;
             }
-            .x2 ._iuz.${reaction} {
-                background-image: url(${pack['px96']});
+            .x2 ._iuz {
+                background-image: url(${pack['px96']}) !important;
             }`;
     }, "");
 }
