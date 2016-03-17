@@ -22,13 +22,26 @@ function buildPackStyle(pack) {
                 background-size: 16px 128px !important;
                 background-position: ${opts['offset']} !important;
             }
-            ._iuz {
-                background-image: url(${pack['px48']}) !important;
+            ._39m[data-reaction="${opts['order']}"] ._39n > div:first-child  {
+                background-position: ${opts['offsetLarge']} !important;
             }
-            .x2 ._iuz {
-                background-image: url(${pack['px96']}) !important;
-            }`;
-    }, "");
+            `;
+    }, "") +
+        `
+        ._iuz {
+            background-image: url(${pack['px48']}) !important;
+        }
+        .x2 ._iuz {
+            background-image: url(${pack['px96']}) !important;
+        }
+        ._39n > div:first-child {
+            background-image: url(${pack['px96']}) !important;
+            background-size: 48px 384px !important;
+        }
+        ._39n > div:first-child svg {
+            display: none !important;
+        }
+        `;
 }
 
 function buildShowHideStyle(pack) {
