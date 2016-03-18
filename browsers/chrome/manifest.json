@@ -1,12 +1,12 @@
 {
   "name": "Reaction Packs for Facebook",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Swap out Facebook's reactions for something a little more fun. View packs at http://www.reactionpacks.com/",
   "manifest_version": 2,
   "permissions": [
     "storage",
-    "*://www.facebook.com/*",
-    "*://www.reactionpacks.com/*"
+    "*://*.facebook.com/*",
+    "*://*.reactionpacks.com/*"
   ],
   "icons": {
     "16": "icon16.png",
@@ -16,9 +16,8 @@
   "content_scripts": [
     {
       "matches": [
-        "*://localhost/*",
-        "*://www.facebook.com/*",
-        "*://www.reactionpacks.com/*"
+        "*://*.facebook.com/*",
+        "*://*.reactionpacks.com/*"
       ],
       "js": [
         "index.js"

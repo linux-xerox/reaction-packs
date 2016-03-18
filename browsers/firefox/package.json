@@ -1,7 +1,7 @@
 {
   "title": "Reaction Packs for Facebook",
   "name": "reaction-packs",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Swap out Facebook's reactions for something a little more fun. View packs at http://www.reactionpacks.com/",
   "homepage": "http://reactionpacks.com",
   "main": "index.js",

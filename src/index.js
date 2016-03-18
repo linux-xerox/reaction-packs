@@ -17,13 +17,17 @@ function buildPackStyle(pack) {
         var opts = reactions[reaction];
 
         return sum + `
-            ._2p7a.${opts['className']}, ._2p7a.${reaction} {
+            ${opts['wwwBlingSelector']},
+            ${opts['touchBlingSelector']} {
                 background-image: url(${pack['px32']}) !important;
                 background-size: 16px 128px !important;
-                background-position: ${opts['offset']} !important;
+                background-position: ${opts['offsetBling']} !important;
             }
-            ._39m[data-reaction="${opts['order']}"] ._39n > div:first-child  {
+            ._39m[data-reaction="${opts['order']}"] ._39n > div:first-child {
                 background-position: ${opts['offsetLarge']} !important;
+            }
+            ._4g34[data-store="{\\"reaction\\":${opts['order']}}"] ._uah i {
+                background-position: ${opts['offsetPercent']} !important;
             }
             `;
     }, "") +
@@ -31,11 +35,13 @@ function buildPackStyle(pack) {
         ._iuz {
             background-image: url(${pack['px48']}) !important;
         }
-        .x2 ._iuz {
+        .x2 ._iuz, ._uah i, ._39n > div:first-child {
             background-image: url(${pack['px96']}) !important;
         }
+        ._uah i {
+            background-size: 100% 800% !important;
+        }
         ._39n > div:first-child {
-            background-image: url(${pack['px96']}) !important;
             background-size: 48px 384px !important;
         }
         ._39n > div:first-child svg {
@@ -129,7 +135,7 @@ if (~document.location.hostname.indexOf("facebook.com")) {
     });
 
     emitter.on('set-pack-failed', (req) => {
-        alert(`[debug] Sorry, using this Pack failed. Please wait a minute, then refresh and try again.`);
+        alert(`We're experiencing a lot of traffic and weren't able to save your Pack. Please wait a minute, then refresh this page and try again.`);
     });
 
     [].forEach.call(document.getElementsByClassName('use-pack'), (el) => {
