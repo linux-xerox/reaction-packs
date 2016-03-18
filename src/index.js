@@ -71,7 +71,7 @@ function setPageStyle(sheet) {
         style.type = 'text/css';
     }
 
-    style.innerHTML = sheet;
+    style.textContent = sheet;
 
     if (firstTime) {
         document.getElementsByTagName('head')[0].appendChild(style);
