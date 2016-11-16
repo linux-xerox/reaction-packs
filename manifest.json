@@ -17,13 +17,17 @@
     "storage"
   ],
   "background": {
-    "scripts": ["refresh-selector.js"]
   },
   "content_scripts": [
     {
-      "matches": ["*://*.facebook.com/*", "*://*.reactionpacks.com/*"],
-      "js": ["index.js"],
-      "css": ["style.css"],
+      "matches": ["*://*.facebook.com/*"],
+      "js": ["facebook.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.reactionpacks.com/*"],
+      "js": ["reactionpacks.js"],
+      "css": ["reactionpacks.css"],
       "run_at": "document_idle"
     }
   ]

@@ -1,3 +1,10 @@
+if (typeof browser === 'undefined') {
+    //noinspection ES6ConvertVarToLetConst
+    var browser = chrome;
+}
+
+const STORAGE = browser.storage.local;
+
 /**
  * Metadata needed to render custom reaction sprites correctly. Of the
  * form:
@@ -11,8 +18,7 @@
  *     "order": `data-reaction selector for animated svg hovers`
  * }
  */
-
-export default {
+const REACTIONS = {
     "like": {
         "name": "Like",
         "wwwBlingSelector": "._2p7a._3j7l, ._9--._3j7l",
@@ -68,3 +74,67 @@ export default {
         "order": 8
     }
 };
+
+
+function buildPackStyle(pack) {
+    return [].reduce.call(Object.keys(REACTIONS), (sum, reaction) => {
+        const opts = REACTIONS[reaction];
+
+        return sum + `
+        ${opts['wwwBlingSelector']},
+        ${opts['touchBlingSelector']} {
+            background-image: url(${pack['px32']}) !important;
+            background-size: 16px 128px !important;
+            background-position: ${opts['offsetBling']} !important;
+        }
+        ._39m[data-reaction="${opts['order']}"] ._39n > div:first-child {
+            background-position: ${opts['offsetLarge']} !important;
+        }
+        ._4g34[data-store="{\\"reaction\\":${opts['order']}}"] ._uah i {
+            background-position: ${opts['offsetPercent']} !important;
+        }
+        `;
+    }, "") +
+    `
+    ._iuz {
+        background-image: url(${pack['px48']}) !important;
+    }
+    .x2 ._iuz, ._uah i, ._39n > div:first-child {
+        background-image: url(${pack['px96']}) !important;
+    }
+    ._uah i {
+        background-size: 100% 800% !important;
+    }
+    ._39n > div:first-child {
+        background-size: 48px 384px !important;
+    }
+    ._39n > div:first-child svg {
+        display: none !important;
+    }
+    `;
+}
+
+
+function createRpStyleElement() {
+    const styleElem = document.createElement('style');
+    styleElem.id = 'reaction-pack-sheet';
+    styleElem.type = 'text/css';
+    document.getElementsByTagName('head')[0].appendChild(styleElem);
+    return styleElem;
+}
+
+
+function setPageStyle(sheet) {
+    const styleElem = document.getElementById('reaction-pack-sheet') || createRpStyleElement();
+    styleElem.textContent = sheet;
+}
+
+
+STORAGE.get('pack', (store) => {
+    if (store.pack) {
+        setTimeout(() => {
+            const stylesheet = buildPackStyle(store.pack);
+            setPageStyle(stylesheet);
+        }, 1);
+    }
+});
