@@ -1,6 +1,6 @@
 import EventEmitter2 from 'eventemitter2';
 
-import reactions from './data/reactions';
+import reactions from './reactions';
 
 // Include browser-specific code and assets. (See webpack.config.js.)
 var browser = require('--browser');
