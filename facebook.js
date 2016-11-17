@@ -14,102 +14,106 @@ const STORAGE = browser.storage.local;
  *     "wwwBlingSelector": `CSS selector for www.fb, web.fb, beta.fb`,
  *     "touchBlingSelector": `CSS selector for touch.fb`,
  *     "offsetBling": `background-position offset for image sprite in bling`,
- *     "offsetLarge": `background-position offset for animated svg hovers`,
- *     "order": `data-reaction selector for animated svg hovers`
+ *     "offsetButton": `background-position offset for animated svg hovers`,
+ *     "id": `data-reaction selector for animated svg hovers`
  * }
+ *
+ * Notes:
+ *
+ * ._iu-: reaction toolbar
+ * ._iuw: reaction button
+ * ._iuw._iuy: currently hovered reaction button
  */
 const REACTIONS = {
     "like": {
+        "id": 1,
         "name": "Like",
-        "wwwBlingSelector": "._2p7a._3j7l, ._9--._3j7l",
+        "cssId": "_3j7l",
         "touchBlingSelector": ".sp_Jnt3vJul-6Q.sx_2ec001, .sp_Jnt3vJul-6Q_2x.sx_a1809d",
         "offsetBling": "0 -48px",
-        "offsetLarge": "0 -144px",
-        "offsetPercent": "0 43%",
-        "order": 1
+        "offsetButton": "0 -144px",
+        "offsetPercent": "0 43%"
     },
     "love": {
+        "id": 2,
         "name": "Love",
-        "wwwBlingSelector": "._2p7a._3j7m, ._9--._3j7m",
+        "cssId": "_3j7m",
         "touchBlingSelector": ".sp_Jnt3vJul-6Q.sx_424b71, .sp_Jnt3vJul-6Q_2x.sx_d23e65",
         "offsetBling": "0 -64px",
-        "offsetLarge": "0 -192px",
-        "offsetPercent": "0 58%",
-        "order": 2
+        "offsetButton": "0 -192px",
+        "offsetPercent": "0 58%"
     },
     "haha": {
+        "id": 4,
         "name": "Haha",
-        "wwwBlingSelector": "._2p7a._3j7o, ._9--._3j7o",
+        "cssId": "_3j7o",
         "touchBlingSelector": ".sp_Jnt3vJul-6Q.sx_fd2881, .sp_Jnt3vJul-6Q_2x.sx_b9c7aa",
         "offsetBling": "0 -32px",
-        "offsetLarge": "0 -96px",
-        "offsetPercent": "0 29%",
-        "order": 4
+        "offsetButton": "0 -96px",
+        "offsetPercent": "0 29%"
     },
     "wow": {
+        "id": 3,
         "name": "Wow",
-        "wwwBlingSelector": "._2p7a._3j7n, ._9--._3j7n",
+        "cssId": "_3j7n",
         "touchBlingSelector": ".sp_Jnt3vJul-6Q.sx_ae4a5e, .sp_Jnt3vJul-6Q_2x.sx_aaf450",
         "offsetBling": "0 -96px",
-        "offsetLarge": "0 -288px",
-        "offsetPercent": "0 86%",
-        "order": 3
+        "offsetButton": "0 -288px",
+        "offsetPercent": "0 86%"
     },
     "sorry": {
+        "id": 7,
         "name": "Sad",
-        "wwwBlingSelector": "._2p7a._3j7r, ._9--._3j7r",
+        "cssId": "_3j7r",
         "touchBlingSelector": ".sp_Jnt3vJul-6Q.sx_608018, .sp_Jnt3vJul-6Q_2x.sx_369a07",
         "offsetBling": "0 -80px",
-        "offsetLarge": "0 -240px",
-        "offsetPercent": "0 72%",
-        "order": 7
+        "offsetButton": "0 -240px",
+        "offsetPercent": "0 72%"
     },
     "anger": {
+        "id": 8,
         "name": "Angry",
-        "wwwBlingSelector": "._2p7a._3j7q, ._9--._3j7q",
+        "cssId": "_3j7q",
         "touchBlingSelector": ".sp_Jnt3vJul-6Q.sx_95ad2a, .sp_Jnt3vJul-6Q_2x.sx_5dc616",
         "offsetBling": "0 0",
-        "offsetLarge": "0 0",
-        "offsetPercent": "0 0",
-        "order": 8
+        "offsetButton": "0 0",
+        "offsetPercent": "0 0"
     }
 };
 
 
-function buildPackStyle(pack) {
-    return [].reduce.call(Object.keys(REACTIONS), (sum, reaction) => {
-        const opts = REACTIONS[reaction];
+function buildPackStylesheet(pack) {
+    return Array.prototype.reduce.call(Object.keys(REACTIONS), (sum, label) => {
+        const reaction = REACTIONS[label];
 
         return sum + `
-        ${opts['wwwBlingSelector']},
-        ${opts['touchBlingSelector']} {
-            background-image: url(${pack['px32']}) !important;
+        /**
+         * ${reaction.name}
+         */
+        ._2p7a.${reaction.cssId}, ._9--.${reaction.cssId}, /* www bling */
+        ${reaction.touchBlingSelector} { /* touch bling */ 
+            background-image: url(${pack.px32}) !important;
             background-size: 16px 128px !important;
-            background-position: ${opts['offsetBling']} !important;
+            background-position: ${reaction.offsetBling} !important;
         }
-        ._39m[data-reaction="${opts['order']}"] ._39n > div:first-child {
-            background-position: ${opts['offsetLarge']} !important;
+        ._2jry ._9-_.${reaction.cssId} { /* www buttons */
+            background-position: ${reaction.offsetButton} !important;
         }
-        ._4g34[data-store="{\\"reaction\\":${opts['order']}}"] ._uah i {
-            background-position: ${opts['offsetPercent']} !important;
+        ._4g34[data-store="{\\"reaction\\":${reaction.id}}"] ._uah ._2p78 { /* touch buttons */
+            background-position: ${reaction.offsetPercent} !important;
         }
         `;
     }, "") +
     `
-    ._iuz {
-        background-image: url(${pack['px48']}) !important;
+    ._iuz ._2p78 { /* www button image, non-HiDPI */
+        background-image: url(${pack.px48}) !important;
     }
-    .x2 ._iuz, ._uah i, ._39n > div:first-child {
-        background-image: url(${pack['px96']}) !important;
-    }
-    ._uah i {
-        background-size: 100% 800% !important;
-    }
-    ._39n > div:first-child {
+    ._iuw ._2p78 { /* www button image, HiDPI */
+        background-image: url(${pack.px96}) !important;
         background-size: 48px 384px !important;
     }
-    ._39n > div:first-child svg {
-        display: none !important;
+    ._uah ._2p78 { /* touch toolbar */
+        background-size: 100% 800% !important;
     }
     `;
 }
@@ -119,7 +123,7 @@ function createRpStyleElement() {
     const styleElem = document.createElement('style');
     styleElem.id = 'reaction-pack-sheet';
     styleElem.type = 'text/css';
-    document.getElementsByTagName('head')[0].appendChild(styleElem);
+    document.documentElement.appendChild(styleElem);
     return styleElem;
 }
 
@@ -132,9 +136,7 @@ function setPageStyle(sheet) {
 
 STORAGE.get('pack', (store) => {
     if (store.pack) {
-        setTimeout(() => {
-            const stylesheet = buildPackStyle(store.pack);
-            setPageStyle(stylesheet);
-        }, 1);
+        const stylesheet = buildPackStylesheet(store.pack);
+        setPageStyle(stylesheet);
     }
 });

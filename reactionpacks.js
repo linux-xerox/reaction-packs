@@ -82,7 +82,7 @@ STORAGE.get('pack', (store) => {
     }
 });
 
-document.querySelectorAll('.use-pack').forEach((el) => {
+Array.prototype.forEach.call(document.querySelectorAll('.use-pack'), (el) => {
     el.addEventListener('click', (evt) => {
         evt.preventDefault();
 
