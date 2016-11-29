@@ -1,23 +1,15 @@
 # Reaction Packs
 
-Custom Reaction Packs for Facebook.
+![Screenshot](https://addons.cdn.mozilla.net/user-media/previews/full/172/172164.png?modified=1458235691)
+
+Choose your own Facebook reaction pictures! View Packs at http://www.reactionpacks.com/
 
 
-## Installation
+## Get the Extension
 
-TODO: Add links to extension pages.
+**Chrome**: https://chrome.google.com/webstore/detail/reaction-packs-for-facebo/djcfkadjljnkkbojdgocopcbdbnmpcan
 
-
-## Contributing
-
-To get started, clone the repository and then run:
-
-```bash
-npm install
-npm run build:<browser>
-```
-
-replacing <browser> with "chrome" or "firefox" as appropriate.
+**Firefox**: https://addons.mozilla.org/en-US/firefox/addon/reaction-packs-for-facebook/
 
 
 ## TODO:
@@ -31,15 +23,3 @@ replacing <browser> with "chrome" or "firefox" as appropriate.
 
 * "Request changes" flow for pack creators.
 * Link to pack creator's URL
-
-
-## Project folder structure:
-
-    # Source code: 
-    assets              # Images
-    browsers            # Browser specific code
-    src                 # Common code across all browsers
-
-    # Build output:
-    build               # The raw extension contents for each browser
-    dist                # Distributable extension package for browsers
