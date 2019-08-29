@@ -96,23 +96,23 @@ function buildPackStylesheet(pack) {
             background-size: 16px 128px !important;
             background-position: ${reaction.offsetBling} !important;
         }
-        ._2jry ._9-_.${reaction.cssId} { /* www buttons */
+        ._2jry ._19kl.${reaction.cssId} { /* www buttons */
             background-position: ${reaction.offsetButton} !important;
         }
-        ._4g34[data-store="{\\"reaction\\":${reaction.id}}"] ._uah ._2p78 { /* touch buttons */
+        ._4g34[data-store="{\\"reaction\\":${reaction.id}}"] ._uah ._2p78 ._41nt{ /* touch buttons */
             background-position: ${reaction.offsetPercent} !important;
         }
         `;
     }, "") +
     `
-    ._iuz ._2p78 { /* www button image, non-HiDPI */
+    ._iuz ._2p78 ._41nt { /* www button image, non-HiDPI */
         background-image: url(${pack.px48}) !important;
     }
-    ._iuw ._2p78 { /* www button image, HiDPI */
+    ._iuw ._2p78 ._41nt{ /* www button image, HiDPI */
         background-image: url(${pack.px96}) !important;
         background-size: 48px 384px !important;
     }
-    ._uah ._2p78 { /* touch toolbar */
+    ._uah ._2p78 ._41nt{ /* touch toolbar */
         background-size: 100% 800% !important;
     }
     `;
