@@ -90,7 +90,7 @@ function buildPackStylesheet(pack) {
         /**
          * ${reaction.name}
          */
-        ._2p7a.${reaction.cssId}, ._9--.${reaction.cssId}, /* www bling */
+        ._2p7a.${reaction.cssId}, ._9--. ._19kl.${reaction.cssId}, /* www bling */
         ${reaction.touchBlingSelector} { /* touch bling */ 
             background-image: url(${pack.px32}) !important;
             background-size: 16px 128px !important;
